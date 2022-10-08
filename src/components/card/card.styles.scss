@@ -1,0 +1,107 @@
+@mixin card-color($primary-color, $secondary-color) {
+	$gradient-step: 10%;
+	background: linear-gradient(
+		135deg,
+		$primary-color calc(50% - $gradient-step),
+		$secondary-color calc(50% + $gradient-step)
+	);
+}
+
+.card {
+	--card-color-red: #b3111f;
+	--card-color-purple: #913c7d;
+	--card-color-green: #16907c;
+	--card-color-blue: #177bb7;
+	--card-color-black: #171717;
+
+	box-sizing: border-box;
+	border-radius: 1rem;
+	border: 0.1rem solid black;
+	padding: 1rem;
+
+	display: grid;
+	grid-template-columns: min-content auto;
+	grid-template-rows: auto;
+	grid-template-areas: 'image info';
+	grid-gap: 0.5rem;
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	.image {
+		grid-area: image;
+		height: 100px;
+		width: auto;
+	}
+
+	.info {
+		grid-area: info;
+		display: flex;
+		flex-direction: column;
+
+		&__title {
+			color: #ffffff;
+			margin-bottom: 0.2rem;
+
+			.name {
+				display: inline-block;
+				font-size: 1rem;
+				line-height: 1rem;
+				font-weight: bold;
+				text-transform: uppercase;
+			}
+
+			.type {
+				display: inline-block;
+				font-size: 0.8rem;
+				line-height: 0.8rem;
+				&::before {
+					content: '|';
+					position: relative;
+					bottom: 0.1rem;
+					margin: 0.5rem;
+				}
+			}
+		}
+
+		&__effect {
+			flex: 1;
+			background-color: rgba(255, 255, 255, 0.8);
+			box-sizing: border-box;
+			border-radius: 0.2rem;
+			border: 0.1rem solid rgba(0, 0, 0, 0.5);
+			width: 100%;
+			padding: 0.2rem;
+			margin: 0;
+
+			color: #000000;
+			font-size: 0.8rem;
+		}
+	}
+
+	&.color {
+		&-red {
+			background-color: var(--card-color-red);
+		}
+		&-green {
+			background-color: var(--card-color-green);
+		}
+		&-blue {
+			background-color: var(--card-color-blue);
+		}
+		&-purple {
+			background-color: var(--card-color-purple);
+		}
+		&-black {
+			background-color: var(--card-color-black);
+		}
+		&-red-green {
+			@include card-color(var(--card-color-red), var(--card-color-green));
+		}
+		&-blue-purple {
+			@include card-color(var(--card-color-blue), var(--card-color-purple));
+		}
+		&-red-black {
+			@include card-color(var(--card-color-red), var(--card-color-black));
+		}
+	}
+}
